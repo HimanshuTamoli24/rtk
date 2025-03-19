@@ -3,21 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTodos, updateTodos, deleteTodo } from "../features/todo/sliceTodo";
 
 function Todo() {
-    const todos = useSelector((state) => state.AllTodoStore.todos) ?? [];
+    const todos = useSelector((state) => state.AllTodoStore.todos?.todos) ?? [];
     const { status, error } = useSelector((state) => state.AllTodoStore);
     const dispatch = useDispatch();
     const [editId, setEditId] = useState(null);
     const [editText, setEditText] = useState("");
 
     const handleUpdate = (id, currentTitle) => {
-        console.log("id", id);
-        console.log("title", currentTitle);
         setEditId(id);
         setEditText(currentTitle);
     };
-        // useEffect(()=>{
-        //     dispatch(fetchTodos());
-        // },[dispatch])
+    useEffect(() => {
+        dispatch(fetchTodos());
+    }, [dispatch])
 
     const saveUpdate = (id) => {
         dispatch(updateTodos({ id, title: editText }));
@@ -27,14 +25,14 @@ function Todo() {
     return (
         <div className="w-full max-w-md bg-gray-800 p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-center mb-2">Todo List</h2>
-            <button className="border text-4xl" onClick={() => fetchTodos()}>fetch todo</button>
+            <button className="border-amber-50 border bg-amber-100/30 hover:bg-amber-100/10 text-xl text-center w-full" >fetch todo</button>
             {todos.length === 0 ? (
                 <p className="text-gray-400 text-center">No todos available</p>
             ) : (
                 <ul className="space-y-2">
                     {todos.map((todo) => (
                         <li key={todo._id} className="flex justify-between items-center p-2 bg-gray-700 rounded-md">
-                            
+
                             {editId === todo._id ? (
                                 <input
                                     type="text"

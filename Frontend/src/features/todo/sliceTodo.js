@@ -4,7 +4,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchTodos = createAsyncThunk('fetchTodos', async () => {
     const response = await fetch('http://localhost:3000/api/v1/todos');
     const data = await response.json();
-    console.log("data", data);
     return data;
 });
 
