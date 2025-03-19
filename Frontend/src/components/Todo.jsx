@@ -15,9 +15,9 @@ function Todo() {
         setEditId(id);
         setEditText(currentTitle);
     };
-        useEffect(()=>{
-            dispatch(fetchTodos());
-        },[dispatch])
+        // useEffect(()=>{
+        //     dispatch(fetchTodos());
+        // },[dispatch])
 
     const saveUpdate = (id) => {
         dispatch(updateTodos({ id, title: editText }));
