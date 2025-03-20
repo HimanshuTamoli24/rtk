@@ -7,12 +7,13 @@ import todoRoutes from "./routes/TodoRoutes.js"
 dotenv.config();
 app.use(cors(
     {
-        origin:"*" ,
-        methods: ["GET", "POST", "PATCH", "DELETE"],
-        credentials: true,
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     }
 
 ));
+app.options("*", cors()); // Allow preflight requests
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "16kb" }))
 
