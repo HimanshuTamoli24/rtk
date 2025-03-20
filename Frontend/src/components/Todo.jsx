@@ -29,7 +29,7 @@ function Todo() {
                 <p className="text-gray-400 text-center">No todos available</p>
             ) : (
                 <ul className="space-y-2">
-                    {todos.map((todo,index) => (
+                    {todos?.map((todo,index) => (
                         <li key={todo._id ||index} className="flex justify-between items-center p-2 bg-gray-700 rounded-md">
 
                             {editId === todo._id ? (

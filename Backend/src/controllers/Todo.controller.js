@@ -69,14 +69,13 @@ const deleteTodo = async (req, res) => {
     try {
         const { id } = req.params;
         const deletedTodo = await Todo.findByIdAndDelete(id);
-
+        console.log("deletedTodo", deletedTodo);
         if (!deletedTodo) {
             return res.status(404).json({ message: "Todo not found" });
         }
 
         return res.status(200).json({
             message: "Todo deleted successfully",
-            todo: deletedTodo,
         });
     } catch (error) {
         console.error(error);
@@ -93,7 +92,7 @@ const getTodoById = async (req, res) => {
         }
         return res.status(200).json({
             message: "Todo retrieved successfully",
-            todo,
+            todos:todo,
         });
     } catch (error) {
         console.error(error);

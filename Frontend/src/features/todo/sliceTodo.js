@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
 const createTodo = createAsyncThunk("createTodo", async (title) => {
     try {
-        console.log("title", title);
         const data = await fetch("http://localhost:3000/api/v1/todos", {
             method: 'POST',
             headers: {
@@ -12,7 +11,6 @@ const createTodo = createAsyncThunk("createTodo", async (title) => {
             body: JSON.stringify({ title: title })
         })
         const response = await data.json()
-        console.log("response", response);
         return response
     } catch (error) {
         console.error(error)
@@ -23,9 +21,8 @@ const createTodo = createAsyncThunk("createTodo", async (title) => {
 
 
 })
-const editTodo = createAsyncThunk("editTodo", async ({title, id}) => {
+const editTodo = createAsyncThunk("editTodo", async ({ title, id }) => {
     try {
-        console.log("title", "id", title, id);
         const data = await fetch(`http://localhost:3000/api/v1/todos/${id}`, {
             method: 'PUT',
             headers: {
@@ -34,7 +31,6 @@ const editTodo = createAsyncThunk("editTodo", async ({title, id}) => {
             body: JSON.stringify({ title: title })
         })
         const response = await data.json()
-        console.log("response", response);
         return response
 
     } catch (error) {
@@ -45,7 +41,6 @@ const editTodo = createAsyncThunk("editTodo", async ({title, id}) => {
 })
 const deleteTodo = createAsyncThunk("deleteTodo", async (id) => {
     try {
-        console.log("id", id);
         const data = await fetch(`http://localhost:3000/api/v1/todos/${id}`, {
             method: 'DELETE',
             headers: {
@@ -54,7 +49,7 @@ const deleteTodo = createAsyncThunk("deleteTodo", async (id) => {
         })
         const response = await data.json()
         console.log("response", response);
-        return response
+        return id
 
 
     } catch (error) {
@@ -67,7 +62,6 @@ const fetchTodo = createAsyncThunk("fetchTodo", async () => {
     try {
         const data = await fetch("http://localhost:3000/api/v1/todos")
         const response = await data.json()
-        console.log("response", response);
         return response.todos
 
     } catch (error) {
@@ -98,7 +92,7 @@ const todoSlice = createSlice({
         })
         builder.addCase(createTodo.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            state.todos = [...state.todos, action.payload]
+            state.todos = [...state.todos, action.payload.todo]
         })
         // edit todo
         builder.addCase(editTodo.pending, (state) => {
@@ -111,7 +105,7 @@ const todoSlice = createSlice({
         })
         builder.addCase(editTodo.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            state.todos = state.todos.map(todo => todo._id === action.payload._id ? { ...todo, title: action.payload.title } : todo)
+            state.todos = state.todos.map(todo => todo._id === action.payload.todo._id ? { ...todo, title: action.payload.todo.title } : todo)
         })
         // delete todo
         builder.addCase(deleteTodo.pending, (state) => {
@@ -124,7 +118,7 @@ const todoSlice = createSlice({
         })
         builder.addCase(deleteTodo.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            state.todos = state.todos.filter(todo => todo._id !== action.payload._id)
+            state.todos = state.todos.filter(todo => todo._id !== action.payload)
         })
         // fetch todos
         builder.addCase(fetchTodo.pending, (state) => {
