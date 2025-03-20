@@ -62,7 +62,7 @@ const fetchTodo = createAsyncThunk("fetchTodo", async () => {
     try {
         const data = await fetch("http://localhost:3000/api/v1/todos")
         const response = await data.json()
-        return response.todos
+        return response.todos || []
 
     } catch (error) {
         console.error(error)
