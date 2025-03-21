@@ -52,7 +52,7 @@ const allTodos = async (req, res) => {
         const todos = await Todo.find({});
 
         if (todos.length === 0) {
-            return res.status(404).json({ message: "No todos found" });
+            return res.status(200).json({ message: "No todos found", todos });
         }
 
         return res.status(200).json({
@@ -92,7 +92,7 @@ const getTodoById = async (req, res) => {
         }
         return res.status(200).json({
             message: "Todo retrieved successfully",
-            todos:todo,
+            todos: todo,
         });
     } catch (error) {
         console.error(error);

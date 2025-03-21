@@ -27,7 +27,6 @@ function AddTodo() {
             <button disabled={status === 'loading'}
                 type="submit" className="w-full mt-2 p-2 bg-indigo-900 rounded-md hover:bg-blue-500/35">
                 {status === 'loading' ? "Adding..." : "Add Todo"}
-                {error === true ? <h1>error</h1> : null}
             </button>
         </form>
     );

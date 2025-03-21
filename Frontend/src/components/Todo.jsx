@@ -37,7 +37,7 @@ function Todo() {
                                     type="text"
                                     value={editText}
                                     onChange={(e) => setEditText(e.target.value)}
-                                    className="w-full bg-gray-600 p-1 rounded-md text-white"
+                                    className="w-full bg-gray-600 p-1  mx-0.5 rounded-md text-white"
                                 />
                             ) : (
                                 <span className="text-white">{todo.title}</span>
@@ -62,8 +62,10 @@ function Todo() {
 
 
             )}
-            {status === "loading" && <p>Loading...</p>}
-            {error && <p className="text-red-500">{error.message}</p>}
+            <span className="w-full border my-2.5 border-white/5 justify-center items-center flex flex-col rounded-sm font-bold">
+                {error && <p className="text-red-500">{error.message}</p>}
+            </span>
+
         </div>
     );
 }
