@@ -7,7 +7,7 @@ import todoRoutes from "./routes/TodoRoutes.js"
 dotenv.config();
 app.use(cors(
     {
-        origin: *,
+        origin: "*",
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     }
 
