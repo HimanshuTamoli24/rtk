@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-
+const FrotendUrl = "https://rtk-red.vercel.app"
+const backendUrl = "https://reacttodobackend-3pyu.onrender.com"
 const createTodo = createAsyncThunk("createTodo", async (title) => {
     try {
-        const data = await fetch("https://reacttodobackend-3pyu.onrender.com/api/v1/todos", {
+        const data = await fetch(`${backendUrl}/api/v1/todos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,7 +24,7 @@ const createTodo = createAsyncThunk("createTodo", async (title) => {
 })
 const editTodo = createAsyncThunk("editTodo", async ({ title, id }) => {
     try {
-        const data = await fetch(`https://reacttodobackend-3pyu.onrender.com/api/v1/todos/${id}`, {
+        const data = await fetch(`${backendUrl}/api/v1/todos/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,7 +42,7 @@ const editTodo = createAsyncThunk("editTodo", async ({ title, id }) => {
 })
 const deleteTodo = createAsyncThunk("deleteTodo", async (id) => {
     try {
-        const data = await fetch(`https://reacttodobackend-3pyu.onrender.com/api/v1/todos/${id}`, {
+        const data = await fetch(`${backendUrl}/api/v1/todos/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,7 +61,7 @@ const deleteTodo = createAsyncThunk("deleteTodo", async (id) => {
 })
 const fetchTodo = createAsyncThunk("fetchTodo", async () => {
     try {
-        const data = await fetch("https://reacttodobackend-3pyu.onrender.com/api/v1/todos")
+        const data = await fetch(`${backendUrl}/api/v1/todos`)
         const response = await data.json()
         return response.todos || []
 
