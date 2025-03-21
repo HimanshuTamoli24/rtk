@@ -7,7 +7,7 @@ import todoRoutes from "./routes/TodoRoutes.js"
 dotenv.config();
 app.use(cors(
     {
-        origin: "https://reacttodobackend-3pyu.onrender.com",
+        origin: "https://rtk-red.vercel.app/",
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     }
 
