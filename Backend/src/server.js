@@ -7,15 +7,21 @@ import todoRoutes from "./routes/TodoRoutes.js"
 dotenv.config();
 app.use(cors(
     {
-        origin: ["https://minetasklist.vercel.app/","https://reacttodobackend-3pyu.onrender.com"],
+        origin: ["https://minetasklist.vercel.app/"],
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     }
 
 ));
-app.options("*", cors()); // Allow preflight requests
+app.options("*", cors()); // Allow preflight requestsQ
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "16kb" }))
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://minetasklist.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+});
 
 app.use("/api/v1/", todoRoutes)
 
