@@ -7,7 +7,7 @@ import todoRoutes from "./routes/TodoRoutes.js"
 dotenv.config();
 app.use(cors(
     {
-        origin: ["https://minetasklist.vercel.app/"],
+        origin: ["https://minetasklist.vercel.app/","https://reacttodobackend-3pyu.onrender.com"],
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     }
 
